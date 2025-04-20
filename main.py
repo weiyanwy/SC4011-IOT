@@ -28,3 +28,7 @@ async def predict_digit(file: UploadFile = File(...)):
     digit = np.argmax(prediction)
     
     return {"digit": int(digit)}
+
+@app.get("/test/")
+async def test():
+    return 1
