@@ -1,10 +1,14 @@
 from fastapi import FastAPI, UploadFile, File
+from fastapi.staticfiles import StaticFiles
+from fastapi.responses import FileResponse
 import numpy as np
 from PIL import Image
 import tensorflow as tf
 import io
 
 app = FastAPI()
+# Serve static files like CSS, JS, images from the 'static' directory
+app.mount("/static", StaticFiles(directory="static"), name="static")
 
 # Load pre-trained MNIST model
 model = tf.keras.models.load_model("mnist_model.h5")
@@ -24,7 +28,3 @@ async def predict_digit(file: UploadFile = File(...)):
     digit = np.argmax(prediction)
     
     return {"digit": int(digit)}
-
-@app.get("/test")
-async def test_api():
-    return {"Successful"}
