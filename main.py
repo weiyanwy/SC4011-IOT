@@ -29,4 +29,4 @@ async def predict_digit(file: UploadFile = File(...)):
 
 @app.get("/test/")
 async def test():
-    return "ok"
+    return {"message": "Server is working!"}
