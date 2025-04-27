@@ -7,8 +7,6 @@ import tensorflow as tf
 import io
 
 app = FastAPI()
-# Serve static files like CSS, JS, images from the 'static' directory
-app.mount("/static", StaticFiles(directory="static"), name="static")
 
 # Load pre-trained MNIST model
 model = tf.keras.models.load_model("mnist_model.h5")
@@ -31,4 +29,4 @@ async def predict_digit(file: UploadFile = File(...)):
 
 @app.get("/test/")
 async def test():
-    return 1
+    return "ok"
